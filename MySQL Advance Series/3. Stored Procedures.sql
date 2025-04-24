@@ -1,0 +1,36 @@
+-- Stored Procedures & Parameter
+
+CREATE PROCEDURE large_salaries()
+SELECT *
+FROM employee_salary
+WHERE salary >=50000;
+
+CALL large_salaries();
+
+-- Create more procedure
+DELIMITER $$
+CREATE PROCEDURE large_salaries2()
+BEGIN
+	SELECT *
+	FROM employee_salary
+	WHERE salary >=50000;
+	SELECT *
+	FROM employee_salary
+	WHERE salary >=10000;
+END $$
+DELIMITER ;
+
+CALL large_salaries2();
+
+-- PARAMETER
+DELIMITER $$
+CREATE PROCEDURE large_salaries3(employee_id_Param INT)
+BEGIN
+	SELECT salary
+    FROM employee_salary
+    WHERE employee_id = employee_id_Param
+    ;
+END $$
+DELIMITER ;
+
+CALL large_salaries3(1); 
